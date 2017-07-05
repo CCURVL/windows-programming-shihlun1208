@@ -16,10 +16,22 @@ using namespace std;
 //       -1 if exception occur (ex. string containing non-digit character)
 int getAscendingStr(string& inputStr)
 {
-	
-	/// Please fill your code here
-
-
+	int i, j, n[5], t;
+	for (i = 0; i<5; i++) {
+		scanf_s("%d", &n[i]);
+	}
+	for (j = 1; j<5; j++) {
+		for (i = j; i < 5; i++) {
+			if (n[j - 1] > n[i]) {
+				t = n[j - 1];
+				n[j - 1] = n[i];
+				n[i] = t;
+			}
+		}
+	}
+	for (i = 1; i <= 5; i++) {
+		printf("%d ", n[i - 1]);
+	}
 	return 0;
 }
 
