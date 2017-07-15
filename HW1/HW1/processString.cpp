@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 // getAscendingStr Function requirement
 //
 // Take space seperated digit string (ex. "1 2 3 5 4") and 
@@ -16,10 +15,10 @@ using namespace std;
 //       -1 if exception occur (ex. string containing non-digit character)
 int getAscendingStr(string& inputStr)
 {
-	int i, j, n[5], t;
-	for (i = 0; i<5; i++) {
-		scanf_s("%d", &n[i]);
-	}
+	
+	printf("%d", inputStr);
+
+	int i, t, j, n[5];
 	for (j = 1; j<5; j++) {
 		for (i = j; i < 5; i++) {
 			if (n[j - 1] > n[i]) {
@@ -48,8 +47,30 @@ int getAscendingStr(string& inputStr)
 //          (return vector size should be 0)
 int solveQ(vector<double> &x, double a, double b, double c)
 {
+	double det, root1, root2, rp, igp;
+	det = b*b - 4 * a*c;
 
-	return 0;
+	if (det > 0)
+	{
+		root1 = (-b + sqrt(det)) / (2 * a);
+		root2 = (-b - sqrt(det)) / (2 * a);
+
+		printf("root1 = %.2f and root2 = %.2f", root1, root2);
+	}
+
+	if (det == 0)
+	{
+		root1 = root2 = -b / (2 * a);
+		printf("root1 = root2 = %.2f;", root1);
+	}
+
+	if (det < 0)
+	{
+		rp = -b / (2 * a);
+		igp = sqrt(-det) / (2 * a);
+		printf("root1 = %.2f+%.2fi and root2 = %.2f-%.2fi", rp, igp, rp, igp);
+	}
+	return -1;
 }
 
 int main(int argc, char*argv[]) {
