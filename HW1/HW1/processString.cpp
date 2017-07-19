@@ -15,23 +15,29 @@ using namespace std;
 //       -1 if exception occur (ex. string containing non-digit character)
 int getAscendingStr(string& inputStr)
 {
-	
-	printf("%d", inputStr);
+	string input = inputStr;
+	istringstream oo(input);
+	string sub_str;
 
-	int i, t, j, n[5];
-	for (j = 1; j<5; j++) {
-		for (i = j; i < 5; i++) {
-			if (n[j - 1] > n[i]) {
-				t = n[j - 1];
-				n[j - 1] = n[i];
-				n[i] = t;
-			}
-		}
+	vector<int>num;
+	while (getline(oo, sub_str, ' '))
+	{
+		int pop = atoi(sub_str.c_str());
+		num.push_back(pop);
 	}
-	for (i = 1; i <= 5; i++) {
-		printf("%d ", n[i - 1]);
+	for (int i = 0; i < input.size(); i++) {
+		if (int(input.c_str()[i]) != 32 && int(input.c_str()[i]) != 45 &&
+			!(int(input.c_str()[i]) > 47 && int(input.c_str()[i]) < 58)) {
+			return -1;
+		}		
 	}
-	return 0;
+		sort(num.begin(), num.end());
+		ostringstream ss;
+		copy(num.begin(), num.end(), ostream_iterator<int>(ss, " "));
+		string s = ss.str();
+		s = s.substr(0, s.length() - 1);
+		cout << s << ' ';
+		return 0;
 }
 
 // solveQ Function requirement
@@ -54,23 +60,26 @@ int solveQ(vector<double> &x, double a, double b, double c)
 	{
 		root1 = (-b + sqrt(det)) / (2 * a);
 		root2 = (-b - sqrt(det)) / (2 * a);
-
-		printf("root1 = %.2f and root2 = %.2f", root1, root2);
+		x.push_back(root1);
+		x.push_back(root2);
+		return 1;
 	}
 
 	if (det == 0)
 	{
 		root1 = root2 = -b / (2 * a);
-		printf("root1 = root2 = %.2f;", root1);
+		x.push_back(root1);
+		cout << x[0] << endl;
+		return 0;
 	}
 
 	if (det < 0)
 	{
-		rp = -b / (2 * a);
+		/*rp = -b / (2 * a);
 		igp = sqrt(-det) / (2 * a);
-		printf("root1 = %.2f+%.2fi and root2 = %.2f-%.2fi", rp, igp, rp, igp);
+		x.push_back(rp + igp);*/
+		return -1;
 	}
-	return -1;
 }
 
 int main(int argc, char*argv[]) {
